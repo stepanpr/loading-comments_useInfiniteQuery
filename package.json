@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/stepanpr/loading-comments#readme",
   "dependencies": {
-    "express": "4.17.2"
+    "express": "4.17.2",
+    "faker": "^5.5.3"
   }
 }
