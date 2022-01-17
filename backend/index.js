@@ -1,16 +1,17 @@
-// import { array } from 'commentModel.js'
-// import * as express from 'express';
+
+
+
+const faker = require("faker");
+
 
 function generateComments() {
 
-/* для парентИД взять готовый ИД из базы данных ?*/
+/* для парентИД взять готовый ИД из базы данных */
 /* создать массивы для ID */
-  // const parentId
-  const idObj = {one: faker.datatype.uuid(), two:faker.datatype.uuid(), three:faker.datatype.uuid(), four:faker.datatype.uuid()}
+
   const arrID = [faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(),  null]
 
-  randFunc = (key) => {
-    // arrFunc[Math.floor(Math.random() * arrFunc.length)]();
+  const randFunc = (key) => {
     const keyRand = Math.floor(Math.random() * arrID.length)
     const id = arrID[keyRand]
     // if (key < keyRand) { //если индекс родительского комментария в масииве больше чем индекс дочернего комментария, то return null
@@ -18,13 +19,12 @@ function generateComments() {
     //   return null
     // }
     if(arrID[key] === id) { //если ID комментария равен рандомно выбранному комментарию, то возвразщаем null, так как комментарий не может быть родителем самого себя 
-      // console.log(id, ' : ' , arrID[key] )
       return null
     }
     return id
   }
 
-  // console.log(arrID.one)
+
 
   return ({ comments: [
     {
@@ -79,8 +79,11 @@ function generateComments() {
   ]});
 }
 
+
+
+
+
 const express = require("express");
-const faker = require("faker");
 
 const port = process.env.PORT || 3001;
 
@@ -102,7 +105,6 @@ var id = faker.datatype.uuid();
 app.get("/comments", (req, res) => {
 
   res.json(generateComments())
-  // res.json(data)
   // res.header("Access-Control-Allow-Origin", "*");
   // res.send(generateComments());
 });
