@@ -14,7 +14,7 @@ interface IComment {
 
 }
 
-interface IComment {
+interface ICommentObj {
   comment: IComment
 }
 
