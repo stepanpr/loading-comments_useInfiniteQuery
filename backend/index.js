@@ -15,9 +15,9 @@ function generateComments(amount) {
   const getRandomParentId = (index) => {
     const randomId = Math.floor(Math.random() * amount)
     const parentId = idArray[randomId]
-    // if (key < keyRand) {           //если индекс родительского комментария в масииве больше чем индекс дочернего комментария, то return null
-    //   return null
-    // }
+    if (index < randomId) {           //если индекс родительского комментария в масииве больше чем индекс дочернего комментария, то return null
+      return null
+    }
     if (idArray[index] === parentId) {
       //если ID комментария равен рандомно выбранному комментарию, то возвразщаем null, так как комментарий не может быть родителем самого себя
       return null
@@ -35,7 +35,6 @@ function generateComments(amount) {
         text: faker.lorem.text(),
       })
     }
-    // console.log(result)
     return result
   }
 
@@ -60,7 +59,7 @@ const app = express()
 
 app.get('/comments', (req, res) => {
   // res.header("Access-Control-Allow-Origin", "*");
-  res.json(generateComments(25))
+  res.json(generateComments(50))
   // res.send(generateComments());
 })
 

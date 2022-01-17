@@ -34,6 +34,10 @@ export const Comments: React.FC = () => {
       }
     })
 
+    console.log(commentList.filter((comment: any) => {
+      return comment.parentId === null;
+    }))
+    
     return commentList.filter((comment: IComment) => {
       //всем ParentId присваиваем null
       return comment.parentId === null
