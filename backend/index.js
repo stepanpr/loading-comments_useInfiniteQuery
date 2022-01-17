@@ -1,98 +1,54 @@
 
 
+const faker = require('faker')
 
-const faker = require("faker");
+function generateComments(amount) {
+  const generateIdArray = (len) => {
+    const arr = []
+    for (let i = 0; i < len; i++) {
+      arr.push(faker.datatype.uuid())
+    }
+    return arr
+  }
+  const idArray = generateIdArray(amount) /* генерация массива id */
 
-
-function generateComments() {
-
-/* для парентИД взять готовый ИД из базы данных */
-/* создать массивы для ID */
-
-  const arrID = [faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(),  null]
-
-  const randFunc = (key) => {
-    const keyRand = Math.floor(Math.random() * arrID.length)
-    const id = arrID[keyRand]
-    // if (key < keyRand) { //если индекс родительского комментария в масииве больше чем индекс дочернего комментария, то return null
-    //   // console.log(key, ' : ' , keyRandom )
+  const getRandomParentId = (index) => {
+    const randomId = Math.floor(Math.random() * amount)
+    const parentId = idArray[randomId]
+    // if (key < keyRand) {           //если индекс родительского комментария в масииве больше чем индекс дочернего комментария, то return null
     //   return null
     // }
-    if(arrID[key] === id) { //если ID комментария равен рандомно выбранному комментарию, то возвразщаем null, так как комментарий не может быть родителем самого себя 
+    if (idArray[index] === parentId) {
+      //если ID комментария равен рандомно выбранному комментарию, то возвразщаем null, так как комментарий не может быть родителем самого себя
       return null
     }
-    return id
+    return parentId
   }
 
+  const commentsMaker = () => {
+    const result = []
+    for (let i = 0; i < amount; ++i) {
+      result.push({
+        id: idArray[i],
+        parentId: getRandomParentId(i),
+        user: faker.name.findName(),
+        text: faker.lorem.text(),
+      })
+    }
+    // console.log(result)
+    return result
+  }
 
-
-  return ({ comments: [
-    {
-      id: arrID[0],
-      parentId: randFunc(0),
-      user: faker.name.findName(),
-      text: faker.lorem.text(),
-    },
-    {
-      id: arrID[1],
-      parentId: randFunc(1),
-      user: faker.name.findName(),
-      text: faker.lorem.text(),
-    },
-    {
-      id: arrID[2],
-      parentId: randFunc(2),
-      user: faker.name.findName(),
-      text: faker.lorem.text(),
-    },
-    {
-      id: arrID[3],
-      parentId: randFunc(3),
-      user: faker.name.findName(),
-      text: faker.lorem.text(),
-    },
-    {
-      id: arrID[4],
-      parentId: randFunc(0),
-      user: faker.name.findName(),
-      text: faker.lorem.text(),
-    },
-    {
-      id: arrID[5],
-      parentId: randFunc(1),
-      user: faker.name.findName(),
-      text: faker.lorem.text(),
-    },
-    {
-      id: arrID[6],
-      parentId: randFunc(2),
-      user: faker.name.findName(),
-      text: faker.lorem.text(),
-    },
-    {
-      id: arrID[7],
-      parentId: randFunc(3),
-      user: faker.name.findName(),
-      text: faker.lorem.text(),
-    },
-    
-  ]});
+  return { comments: commentsMaker() }
 }
 
+const express = require('express')
 
+const port = process.env.PORT || 3001
 
-
-
-const express = require("express");
-
-const port = process.env.PORT || 3001;
-
-const app = express();
-
-var id = faker.datatype.uuid();
+const app = express()
 
 // app.use(express.json())
-
 // var allowCrossDomain = function(req, res, next) {
 //   res.header('Access-Control-Allow-Origin', "*");
 //   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -102,15 +58,12 @@ var id = faker.datatype.uuid();
 
 // app.use(allowCrossDomain);
 
-app.get("/comments", (req, res) => {
-
-  res.json(generateComments())
+app.get('/comments', (req, res) => {
   // res.header("Access-Control-Allow-Origin", "*");
+  res.json(generateComments(25))
   // res.send(generateComments());
-});
+})
 
 app.listen(port, () => {
-  console.log(`Server is starting on port ${port}`);
-});
-
-
+  console.log(`Server is starting on port ${port}`)
+})
