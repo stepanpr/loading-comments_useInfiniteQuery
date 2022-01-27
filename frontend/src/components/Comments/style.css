@@ -1,7 +1,12 @@
 .comment {
-  margin-left: 25px;
+  /* margin-left: 25px; */
   margin-top: 10px;
   border-left: 2px solid rgb(166, 170, 169);
+}
+
+.isChildren {
+  margin-left: 25px;
+
 }
 
 .button {

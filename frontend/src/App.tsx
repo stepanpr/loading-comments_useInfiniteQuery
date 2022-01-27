@@ -1,9 +1,9 @@
 import React from 'react'
 import { Comments } from './components/Comments'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from "react-query/devtools";
 import './App.css'
-// import 'bulma/css/bulma.min.css'
-import 'bulma/css/bulma.css'
+import 'bulma/css/bulma.css' // 'bulma/css/bulma.min.css'
 
 const queryClient = new QueryClient()
 
@@ -22,6 +22,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </div>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }
