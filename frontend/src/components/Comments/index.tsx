@@ -11,6 +11,11 @@ import './style.css'
  ** text:          текст комментария
  */
 
+/***** ICommentFull
+ ** comment:       комментарий IComment
+ ** isChildren:    если равно true, то добавляется отступ margin-left к стилю комментария
+ */
+
 export interface IComment {
   id: string
   parentId: string
@@ -21,7 +26,7 @@ export interface IComment {
 
 export interface ICommentFull {
   comment: IComment
-  isChildren: boolean /* если true, то добавляется отступ margin-left к стилю комментария */
+  isChildren: boolean
 }
 
 export const Comments: React.FC = () => {
