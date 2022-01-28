@@ -39,15 +39,7 @@ function generateComments(amount, cursor) {
     return result
   }
 
-  // previousPage: pageNum > 0 ? (pageNum - 1) : null,
-  // nextPage: pageNum + 1,
-
-  // const nextId = cursor < 10 ? data[data.length - 1].id + 1 : null
-  // const previousId = cursor > -10 ? data[0].id - pageSize : null
-
-  // return { nextCursor: ++cursor, nextPage: cursor + 1, previousPage: cursor > 0 ? (cursor - 1) : null, comments: commentsMaker() }
   return commentsMaker() 
-
 }
 
 const express = require('express')
@@ -65,18 +57,14 @@ const app = express()
 
 app.get('/comments', (req, res) => {
   // res.header("Access-Control-Allow-Origin", "*");
-  // const { pageParam } = req.query
-  const cursor = parseInt(req.query.cursor) || 0
+  // const { cursor } = req.query
   // const cursor = req.query.cursor;
   // const pageNum = Number(cursor);
+  const cursor = parseInt(req.query.cursor) || 0
 
   console.log(cursor)
 
-  // res.json({ data: generateComments(AMOUNT_OF_COMMENTS, cursor), nextCursor: cursor+1})
-  // res.json({ data: {id: faker.datatype.uuid(), parentId: 'ff', user: 'dd', text: 'ddfas'}, nextCursor: cursor+1})
   res.json({ comments: generateComments(AMOUNT_OF_COMMENTS, cursor), nextCursor: cursor+1})
-
-
   // res.send(generateComments());
 })
 
@@ -84,6 +72,19 @@ app.get('/comments', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is starting on port ${port}`)
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ////////////////////////////////////////////////////////
