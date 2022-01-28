@@ -47,8 +47,7 @@ export const Comments: React.FC = () => {
 
   const getComments = async ({ pageParam = 0 }) => {
     const response = await fetch('/comments?cursor=' + pageParam)
-    if (!response.ok)
-      throw new Error('Ошибка соединения')
+    if (!response.ok) throw new Error('Ошибка соединения')
     return response.json()
   }
 
@@ -59,6 +58,9 @@ export const Comments: React.FC = () => {
       getNextPageParam: (lastPage, pages) => {
         return page + 1
       },
+      keepPreviousData: true,
+      retry: 3,
+      refetchOnWindowFocus: false,
     }
   )
 
