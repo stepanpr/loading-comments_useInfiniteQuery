@@ -46,10 +46,10 @@ export const Comments: React.FC = () => {
   }
 
   const getComments = async ({ pageParam = 0 }) => {
-    const response = await fetch('/comments?cursor=' + pageParam).then(
-      (response: any) => response.json()
-    )
-    return response
+    const response = await fetch('/comments?cursor=' + pageParam)
+    if (!response.ok)
+      throw new Error('Ошибка соединения')
+    return response.json()
   }
 
   const { data, fetchNextPage, isError, isLoading } = useInfiniteQuery(
