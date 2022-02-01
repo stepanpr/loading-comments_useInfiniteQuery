@@ -1,37 +1,16 @@
 .comment {
-  /* margin-left: 25px; */
-  margin-top: 10px;
   border-left: 2px solid rgb(166, 170, 169);
 }
 
-.isChildren {
-  margin-left: 25px;
-
-}
-
-.button {
-  margin-top: 30px;
-}
-
 .title {
-  margin: 20px auto;
-}
-
-.hero {
-  margin-bottom: 30px;
+  text-align: center;
 }
 
 .user {
   background-color: rgb(181, 223, 214);
   font-weight: 600;
-  padding-left: 20px;
 }
 
 .text {
   background-color: rgb(222, 233, 230);
-  padding: 5px 10px;
-}
-
-.box {
-  margin-bottom: 50px;
 }

@@ -1,19 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useInfiniteQuery } from 'react-query'
 import { Comment } from './Comment'
 import './style.css'
 
 /***** IComment
- ** id:            идетификатор
- ** parentId:      идентификатор родителя
- ** children[]:    массив дочерних комментариев (создается и заполняется в nestedComments())
- ** user:          имя пользователя
- ** text:          текст комментария
+ ** @param {string} id            идетификатор
+ ** @param {string} parentId      идентификатор родителя
+ ** @param {IComment[]} children  массив дочерних комментариев (создается и заполняется в nestedComments())
+ ** @param {string} user          имя пользователя
+ ** @param {string} text          текст комментария
+ *
  */
 
 /***** ICommentFull
- ** comment:       комментарий IComment
- ** isChildren:    если равно true, то добавляется отступ margin-left к стилю комментария
+ ** @param {IComment} comment     комментарий IComment
+ ** @param {boolean} isChildren   если равно true, то добавляется отступ margin-left к стилю комментария
  */
 
 export interface IComment {
@@ -30,13 +31,6 @@ export interface ICommentFull {
 }
 
 export const Comments: React.FC = () => {
-  const [page, setPage] = useState(0)
-
-  /* вывод дерева комментариев - II вариант => */
-  // const [allComments, setAllComments] = useState<IComment[]>([])
-  // const [newComments, setNewComments] = useState<IComment[]>([])
-  /* <= вывод дерева комментариев - II вариант */
-
   const nestedComments = (commentsArray: IComment[]) => {
     const map = Object.create(null)
     commentsArray.forEach(
@@ -61,7 +55,7 @@ export const Comments: React.FC = () => {
     getComments,
     {
       getNextPageParam: (lastPage, pages) => {
-        return page + 1
+        return lastPage.nextCursor
       },
       keepPreviousData: true,
       retry: 3,
@@ -70,14 +64,7 @@ export const Comments: React.FC = () => {
   )
 
   const handleClick = () => {
-    setPage(page + 1)
     fetchNextPage()
-    /* вывод дерева комментариев - II вариант => */
-    // data?.pages.forEach((page, i) => {
-    //   setNewComments (nestComments( page.comments))
-    //   setAllComments( [...allComments, ...newComments] )
-    // })
-    /* <= вывод дерева комментариев - II вариант */
   }
 
   return (
@@ -99,26 +86,10 @@ export const Comments: React.FC = () => {
             })
           })}
         </div>
-
-        /* вывод дерева комментариев - II вариант => */
-        // <div>
-        //   {
-        //     allComments.map((comment: IComment) => {
-        //       return (
-        //         <Comment
-        //           key={comment.id}
-        //           comment={comment}
-        //           isChildren={false}
-        //         />
-        //       )
-        //     })
-        //   }
-        // </div>
-        /* <= вывод дерева комментариев - II вариант */
       )}
       <button
         className={
-          'button is-normall is-primary is-light is-fullwidth' +
+          'button mt-6 is-normall is-primary is-light is-fullwidth' +
           (isLoading ? ' is-loading' : '')
         }
         onClick={handleClick}

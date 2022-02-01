@@ -11,10 +11,10 @@ export const Comment: React.FC<ICommentFull> = ({
   })
   return (
     <div
-      className={'comment content is-small' + (isChildren ? ' isChildren' : '')}
+      className={'comment mt-2 content is-small' + (isChildren ? ' ml-5' : '')}
     >
-      <div className="user">{comment.user}</div>
-      <div className="text">{comment.text}</div>
+      <div className="user pl-5">{comment.user}</div>
+      <div className="text px-3 py-2">{comment.text}</div>
       {nestedComments}
     </div>
   )

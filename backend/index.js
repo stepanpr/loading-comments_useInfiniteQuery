@@ -1,4 +1,4 @@
-const AMOUNT_OF_COMMENTS = 10
+const AMOUNT_OF_COMMENTS = 4
 
 const faker = require('faker')
 

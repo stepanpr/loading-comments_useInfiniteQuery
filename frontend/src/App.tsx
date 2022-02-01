@@ -11,12 +11,14 @@ const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <div>
-        <div className="hero is-primary">
-          <h6 className="title is-6">Вложенные комментарии (useInfiniteQuery)</h6>
+        <div className="hero is-primary mb-5">
+          <h6 className="title is-6 my-4">
+            Вложенные комментарии (useInfiniteQuery)
+          </h6>
         </div>
         <div className="columns is-multiline is-centered is-mobile is-gapless">
           <div className="column is-four-fifths is-black">
-            <div className="box">
+            <div className="box mb-6">
               <Comments />
             </div>
           </div>
