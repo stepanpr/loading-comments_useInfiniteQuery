@@ -1,7 +1,7 @@
 ### loading-comments_useInfiniteQuery 
 *(react-query, express, faker, bulma)*
 
-##### Подгрузка с бекенда коммнтариев, сгенерированных faker при помощи useInfiniteQuery
+##### Подгрузка с бекенда комментариев, сгенерированных faker при помощи useInfiniteQuery
 
 ***
 
